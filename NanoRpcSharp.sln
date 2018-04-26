@@ -3,7 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoRpcSharp", "NanoRpcSharp\NanoRpcSharp.csproj", "{486B5CE4-4DE9-432D-BDC1-8FC9B4888CCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NanoRpcSharp", "NanoRpcSharp\NanoRpcSharp.csproj", "{486B5CE4-4DE9-432D-BDC1-8FC9B4888CCA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{62E6149B-4C1F-451A-9D35-1154F67EE562}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		GlobalSuppressions.cs = GlobalSuppressions.cs
+		LICENSE = LICENSE
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NanoRpcSharp.Tests", "NanoRpcSharp.Tests\NanoRpcSharp.Tests.csproj", "{17F767F3-B24A-4713-88DC-EFB057A52AB7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NanoRpcSharp.Demo", "NanoRpcSharp.Demo\NanoRpcSharp.Demo.csproj", "{2AA91564-A8C7-4594-BE88-C49BAA98F9CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +26,14 @@ Global
 		{486B5CE4-4DE9-432D-BDC1-8FC9B4888CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{486B5CE4-4DE9-432D-BDC1-8FC9B4888CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{486B5CE4-4DE9-432D-BDC1-8FC9B4888CCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17F767F3-B24A-4713-88DC-EFB057A52AB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17F767F3-B24A-4713-88DC-EFB057A52AB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17F767F3-B24A-4713-88DC-EFB057A52AB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17F767F3-B24A-4713-88DC-EFB057A52AB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AA91564-A8C7-4594-BE88-C49BAA98F9CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AA91564-A8C7-4594-BE88-C49BAA98F9CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AA91564-A8C7-4594-BE88-C49BAA98F9CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AA91564-A8C7-4594-BE88-C49BAA98F9CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
