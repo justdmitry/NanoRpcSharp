@@ -44,7 +44,7 @@
             var account = "xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3";
             var balance = await nanoClient.AccountBalanceAsync(account);
             logger.LogInformation($"Account: {account}");
-            logger.LogInformation($"Balance RAW:  {balance.Balance.ToBigInteger()}");
+            logger.LogInformation($"Balance RAW:  {balance.Balance}");
 
             var nanoBalance = await nanoClient.RaiFromRawAsync(balance.Balance);
             logger.LogInformation($"Balance RAI:  {nanoBalance}");

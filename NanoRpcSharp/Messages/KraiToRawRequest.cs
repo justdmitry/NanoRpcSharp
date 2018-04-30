@@ -1,6 +1,9 @@
 ﻿namespace NanoRpcSharp.Messages
 {
-    public class KraiToRawRequest : RequestBase<UInt256Amount>
+    /// <summary>
+    /// Multiply an krai amount by the krai ratio.
+    /// </summary>
+    public class KraiToRawRequest : RequestBase<BigIntegerAmount>
     {
         public KraiToRawRequest(decimal amount)
             : base("krai_to_raw")

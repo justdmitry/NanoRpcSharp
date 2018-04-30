@@ -3,7 +3,7 @@
     using System;
     using Newtonsoft.Json;
 
-    public class UnixDateTimeConverter : JsonConverter
+    public class DateTimeOffsetConverter : JsonConverter
     {
         private static readonly DateTimeOffset ZeroDateTime = new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero);
 

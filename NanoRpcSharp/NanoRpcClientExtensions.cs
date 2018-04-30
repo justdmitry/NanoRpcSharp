@@ -1,5 +1,6 @@
 ﻿namespace NanoRpcSharp
 {
+    using System.Numerics;
     using System.Threading.Tasks;
     using NanoRpcSharp.Messages;
 
@@ -8,7 +9,7 @@
         #region Accounts
 
         /// <summary>
-        /// Returns how many RAW is owned and how many have not yet been received by <see cref="Account"/>
+        /// Sends <see cref="AccountBalanceRequest"/>
         /// </summary>
         public static Task<AccountBalance> AccountBalanceAsync(this NanoRpcClient client, Account account)
         {
@@ -16,7 +17,7 @@
         }
 
         /// <summary>
-        /// Get number of blocks for a specific <see cref="Account"/>
+        /// Sends <see cref="AccountBlockCountRequest"/>
         /// </summary>
         public static async Task<long> AccountBlockCountAsync(this NanoRpcClient client, Account account)
         {
@@ -25,11 +26,9 @@
         }
 
         /// <summary>
-        /// Returns frontier, open block, change representative block, balance, last modified timestamp
-        /// from local database & block count for <see cref="Account"/>.
-        /// Only works for accounts that have an entry on the ledger, will return "Account not found" otherwise.
+        /// Sends <see cref="AccountInfoRequest"/>
         /// </summary>
-        public static Task<AccountInfo> AccountInfoAsync(this NanoRpcClient client, Account account, bool representative = false, bool weight = false, bool pending = false)
+        public static Task<AccountInfo> AccountInfoAsync(this NanoRpcClient client, Account account, bool? representative = null, bool? weight = null, bool? pending = null)
         {
             return client.SendAsync(new AccountInfoRequest(account)
             {
@@ -52,37 +51,55 @@
 
         #region Conversion
 
-        public static async Task<decimal> KraiFromRawAsync(this NanoRpcClient client, UInt256 amount)
+        /// <summary>
+        /// Sends <see cref="KraiFromRawRequest"/>
+        /// </summary>
+        public static async Task<decimal> KraiFromRawAsync(this NanoRpcClient client, BigInteger amount)
         {
             var r = await client.SendAsync(new KraiFromRawRequest(amount));
             return r.Amount;
         }
 
-        public static async Task<UInt256> KraiToRawAsync(this NanoRpcClient client, decimal amount)
+        /// <summary>
+        /// Sends <see cref="KraiToRawRequest"/>
+        /// </summary>
+        public static async Task<BigInteger> KraiToRawAsync(this NanoRpcClient client, decimal amount)
         {
             var r = await client.SendAsync(new KraiToRawRequest(amount));
             return r.Amount;
         }
 
-        public static async Task<decimal> MraiFromRawAsync(this NanoRpcClient client, UInt256 amount)
+        /// <summary>
+        /// Sends <see cref="MraiFromRawRequest"/>
+        /// </summary>
+        public static async Task<decimal> MraiFromRawAsync(this NanoRpcClient client, BigInteger amount)
         {
             var r = await client.SendAsync(new MraiFromRawRequest(amount));
             return r.Amount;
         }
 
-        public static async Task<UInt256> MraiToRawAsync(this NanoRpcClient client, decimal amount)
+        /// <summary>
+        /// Sends <see cref="MraiToRawRequest"/>
+        /// </summary>
+        public static async Task<BigInteger> MraiToRawAsync(this NanoRpcClient client, decimal amount)
         {
             var r = await client.SendAsync(new MraiToRawRequest(amount));
             return r.Amount;
         }
 
-        public static async Task<decimal> RaiFromRawAsync(this NanoRpcClient client, UInt256 amount)
+        /// <summary>
+        /// Sends <see cref="RaiFromRawRequest"/>
+        /// </summary>
+        public static async Task<decimal> RaiFromRawAsync(this NanoRpcClient client, BigInteger amount)
         {
             var r = await client.SendAsync(new RaiFromRawRequest(amount));
             return r.Amount;
         }
 
-        public static async Task<UInt256> RaiToRawAsync(this NanoRpcClient client, decimal amount)
+        /// <summary>
+        /// Sends <see cref="RaiToRawRequest"/>
+        /// </summary>
+        public static async Task<BigInteger> RaiToRawAsync(this NanoRpcClient client, decimal amount)
         {
             var r = await client.SendAsync(new RaiToRawRequest(amount));
             return r.Amount;

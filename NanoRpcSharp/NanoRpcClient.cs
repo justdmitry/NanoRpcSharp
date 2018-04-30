@@ -7,12 +7,13 @@
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
+    using Newtonsoft.Json.Serialization;
 
     public class NanoRpcClient
     {
         private static readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings
         {
-            ContractResolver = new Util.JsonLowerCaseUnderscoreContractResolver(),
+            ContractResolver = new DefaultContractResolver() { NamingStrategy = new SnakeCaseNamingStrategy() },
             NullValueHandling = NullValueHandling.Ignore,
         };
 
@@ -22,9 +23,10 @@
 
         static NanoRpcClient()
         {
-            JsonSettings.Converters.Add(new UInt256Converter());
-            JsonSettings.Converters.Add(new UnixDateTimeConverter());
-            JsonSettings.Converters.Add(new LongAsStringConverter());
+            JsonSettings.Converters.Add(new BigIntegerConverter());
+            JsonSettings.Converters.Add(new BooleanConverter());
+            JsonSettings.Converters.Add(new NullableBooleanConverter());
+            JsonSettings.Converters.Add(new DateTimeOffsetConverter());
         }
 
         public NanoRpcClient(HttpClient httpClient, ILogger<NanoRpcClient> logger)
@@ -33,11 +35,21 @@
             this.logger = logger;
         }
 
+        public static string Serialize<TResponse>(RequestBase<TResponse> request)
+        {
+            return JsonConvert.SerializeObject(request, JsonSettings);
+        }
+
+        public static TResponse Deserialize<TResponse>(string json)
+        {
+            return JsonConvert.DeserializeObject<TResponse>(json, JsonSettings);
+        }
+
         public async Task<TResponse> SendAsync<TResponse>(RequestBase<TResponse> request)
         {
             try
             {
-                var reqText = JsonConvert.SerializeObject(request, JsonSettings);
+                var reqText = Serialize(request);
                 logger.LogDebug("Request:  " + reqText);
                 var resp = await httpClient.PostAsync("/", new StringContent(reqText, Encoding.UTF8, "application/json"));
                 resp.EnsureSuccessStatusCode();

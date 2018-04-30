@@ -1,6 +1,9 @@
 ﻿namespace NanoRpcSharp.Messages
 {
-    public class RaiToRawRequest : RequestBase<UInt256Amount>
+    /// <summary>
+    /// Multiply an rai amount by the rai ratio.
+    /// </summary>
+    public class RaiToRawRequest : RequestBase<BigIntegerAmount>
     {
         public RaiToRawRequest(decimal amount)
             : base("rai_to_raw")

@@ -1,13 +1,18 @@
 ﻿namespace NanoRpcSharp.Messages
 {
+    using System.Numerics;
+
+    /// <summary>
+    /// Divide a raw amount down by the Mrai ratio.
+    /// </summary>
     public class MraiFromRawRequest : RequestBase<DecimalAmount>
     {
-        public MraiFromRawRequest(UInt256 amount)
+        public MraiFromRawRequest(BigInteger amount)
             : base("mrai_from_raw")
         {
             this.Amount = amount;
         }
 
-        public UInt256 Amount { get; set; }
+        public BigInteger Amount { get; set; }
     }
 }
