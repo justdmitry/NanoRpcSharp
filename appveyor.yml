@@ -1,0 +1,8 @@
+version: N{build}
+image: Visual Studio 2017
+before_build:
+- cmd: dotnet restore
+build:
+  verbosity: minimal
+test_script:
+- cmd: dotnet test NanoRpcSharp.Tests/NanoRpcSharp.Tests.csproj
