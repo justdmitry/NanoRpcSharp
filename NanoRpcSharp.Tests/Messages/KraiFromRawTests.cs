@@ -31,9 +31,9 @@
   ""amount"": ""1""
 }
 ";
-            var obj = NanoRpcClient.Deserialize<DecimalAmount>(validJson);
+            var obj = NanoRpcClient.Deserialize<BigIntegerAmount>(validJson);
 
-            Assert.Equal(1M, obj.Amount);
+            Assert.Equal(BigInteger.One, obj.Amount);
         }
     }
 }

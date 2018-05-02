@@ -56,8 +56,8 @@
             var info = await nanoClient.AccountInfoAsync(account, true, true, true);
             logger.LogInformation(info.OpenBlock);
 
-            info = await nanoClient.AccountInfoAsync("xrb_3i7qx5qp645sdjd4ncq1q34fby95zmwotzbi9x1gt1c96ix4uqyian8fnao9");
-            logger.LogInformation(info.OpenBlock);
+            var hist = await nanoClient.AccountHistoryAsync("xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3", true, 2);
+            logger.LogInformation(hist.History.Count.ToString());
         }
     }
 }

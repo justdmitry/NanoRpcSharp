@@ -10,7 +10,7 @@
         [Fact]
         public void RequestOk()
         {
-            var req = new KraiToRawRequest(1M);
+            var req = new KraiToRawRequest(BigInteger.One);
             var reqJson = NanoRpcClient.Serialize(req);
 
             var validJson = @"

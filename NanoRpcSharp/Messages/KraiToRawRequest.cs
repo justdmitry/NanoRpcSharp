@@ -1,16 +1,18 @@
 ﻿namespace NanoRpcSharp.Messages
 {
+    using System.Numerics;
+
     /// <summary>
     /// Multiply an krai amount by the krai ratio.
     /// </summary>
     public class KraiToRawRequest : RequestBase<BigIntegerAmount>
     {
-        public KraiToRawRequest(decimal amount)
+        public KraiToRawRequest(BigInteger amount)
             : base("krai_to_raw")
         {
             this.Amount = amount;
         }
 
-        public decimal Amount { get; set; }
+        public BigInteger Amount { get; set; }
     }
 }

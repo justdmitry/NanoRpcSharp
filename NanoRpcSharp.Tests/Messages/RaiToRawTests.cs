@@ -10,12 +10,12 @@
         [Fact]
         public void RequestOk()
         {
-            var req = new RaiToRawRequest(1M);
+            var req = new RaiToRawRequest(BigInteger.One);
             var reqJson = NanoRpcClient.Serialize(req);
 
             var validJson = @"
 {
-  ""action"": ""mrai_to_raw"",  
+  ""action"": ""rai_to_raw"",  
   ""amount"": ""1""
 }
 ";

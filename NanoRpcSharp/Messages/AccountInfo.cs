@@ -5,11 +5,11 @@
 
     public class AccountInfo
     {
-        public string Frontier { get; set; }
+        public Hex32 Frontier { get; set; }
 
-        public string OpenBlock { get; set; }
+        public Hex32 OpenBlock { get; set; }
 
-        public string RepresentativeBlock { get; set; }
+        public Hex32 RepresentativeBlock { get; set; }
 
         public BigInteger Balance { get; set; }
 

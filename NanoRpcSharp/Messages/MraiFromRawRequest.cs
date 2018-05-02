@@ -5,7 +5,7 @@
     /// <summary>
     /// Divide a raw amount down by the Mrai ratio.
     /// </summary>
-    public class MraiFromRawRequest : RequestBase<DecimalAmount>
+    public class MraiFromRawRequest : RequestBase<BigIntegerAmount>
     {
         public MraiFromRawRequest(BigInteger amount)
             : base("mrai_from_raw")

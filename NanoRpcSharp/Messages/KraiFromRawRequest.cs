@@ -5,7 +5,7 @@
     /// <summary>
     /// Divide a raw amount down by the krai ratio.
     /// </summary>
-    public class KraiFromRawRequest : RequestBase<DecimalAmount>
+    public class KraiFromRawRequest : RequestBase<BigIntegerAmount>
     {
         public KraiFromRawRequest(BigInteger amount)
             : base("krai_from_raw")

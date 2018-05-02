@@ -10,7 +10,7 @@
         [Fact]
         public void RequestOk()
         {
-            var req = new MraiToRawRequest(1M);
+            var req = new MraiToRawRequest(BigInteger.One);
             var reqJson = NanoRpcClient.Serialize(req);
 
             var validJson = @"

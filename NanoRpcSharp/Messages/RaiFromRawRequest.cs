@@ -5,7 +5,7 @@
     /// <summary>
     /// Divide a raw amount down by the rai ratio.
     /// </summary>
-    public class RaiFromRawRequest : RequestBase<DecimalAmount>
+    public class RaiFromRawRequest : RequestBase<BigIntegerAmount>
     {
         public RaiFromRawRequest(BigInteger amount)
             : base("rai_from_raw")
