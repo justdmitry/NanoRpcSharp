@@ -2,6 +2,6 @@
 {
     public class AccountMove
     {
-        public byte Moved { get; set; }
+        public int Moved { get; set; }
     }
 }

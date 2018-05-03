@@ -81,7 +81,7 @@
         /// <summary>
         /// Sends <see cref="AccountMoveRequest"/>
         /// </summary>
-        public static async Task<byte> AccountsMoveAsync(this NanoRpcClient client, Hex32 source, Hex32 wallet, params Account[] accounts)
+        public static async Task<int> AccountsMoveAsync(this NanoRpcClient client, Hex32 source, Hex32 wallet, params Account[] accounts)
         {
             var r = await client.SendAsync(new AccountMoveRequest(source, wallet, accounts));
             return r.Moved;
@@ -90,9 +90,18 @@
         /// <summary>
         /// Sends <see cref="AccountKeyRequest"/>
         /// </summary>
-        public static Task<AccountKey> AccountsKeyAsync(this NanoRpcClient client, Account account)
+        public static Task<AccountKey> AccountKeyAsync(this NanoRpcClient client, Account account)
         {
             return client.SendAsync(new AccountKeyRequest(account));
+        }
+
+        /// <summary>
+        /// Sends <see cref="AccountRemoveRequest"/>
+        /// </summary>
+        public static async Task<int> AccountsRemoveAsync(this NanoRpcClient client, Hex32 wallet, Account account)
+        {
+            var r = await client.SendAsync(new AccountRemoveRequest(wallet, account));
+            return r.Removed;
         }
 
         /// <summary>
