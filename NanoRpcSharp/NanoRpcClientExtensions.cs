@@ -49,7 +49,7 @@
         }
 
         /// <summary>
-        /// Sends <see cref="AccountGet"/>
+        /// Sends <see cref="AccountGetRequest"/>
         /// </summary>
         public static async Task<Account> AccountGetAsync(this NanoRpcClient client, Hex32 key)
         {
@@ -58,7 +58,7 @@
         }
 
         /// <summary>
-        /// Sends <see cref="AccountHistoryAsync"/>
+        /// Sends <see cref="AccountHistoryRequest"/>
         /// </summary>
         public static Task<AccountHistory> AccountHistoryAsync(this NanoRpcClient client, Account account, bool raw = false, int count = -1, Hex32? head = null)
         {
@@ -70,7 +70,7 @@
         }
 
         /// <summary>
-        /// Sends <see cref="AccountListAsync"/>
+        /// Sends <see cref="AccountListRequest"/>
         /// </summary>
         public static async Task<List<Account>> AccountListAsync(this NanoRpcClient client, Hex32 wallet)
         {
@@ -105,12 +105,125 @@
         }
 
         /// <summary>
+        /// Sends <see cref="AccountRepresentativeRequest"/>
+        /// </summary>
+        public static async Task<Account> AccountRepresentativeAsync(this NanoRpcClient client, Account account)
+        {
+            var r = await client.SendAsync(new AccountRepresentativeRequest(account));
+            return r.Representative;
+        }
+
+        /// <summary>
+        /// Sends <see cref="AccountRepresentativeSetRequest"/>
+        /// </summary>
+        public static async Task<Hex32> AccountRepresentativeSetAsync(this NanoRpcClient client, Hex32 wallet, Account account, Account representative, Hex8? work = null)
+        {
+            var r = await client.SendAsync(new AccountRepresentativeSetRequest(wallet, account, representative, work));
+            return r.Block;
+        }
+
+        /// <summary>
+        /// Sends <see cref="AccountWeightRequest"/>
+        /// </summary>
+        public static async Task<BigInteger> AccountWeightAsync(this NanoRpcClient client, Account account)
+        {
+            var r = await client.SendAsync(new AccountWeightRequest(account));
+            return r.Weight;
+        }
+
+        /// <summary>
+        /// Sends <see cref="AccountsBalancesRequest"/>
+        /// </summary>
+        public static Task<AccountsBalances> AccountsBalancesAsync(this NanoRpcClient client, params Account[] accounts)
+        {
+            return client.SendAsync(new AccountsBalancesRequest(accounts));
+        }
+
+        /// <summary>
+        /// Sends <see cref="AccountsCreateRequest"/>
+        /// </summary>
+        public static async Task<Account[]> AccountsCreateAsync(this NanoRpcClient client, Hex32 wallet, byte count, bool work = false)
+        {
+            var r = await client.SendAsync(new AccountsCreateRequest(wallet, count, work));
+            return r.Accounts;
+        }
+
+        /// <summary>
+        /// Sends <see cref="AccountsFrontiersRequest"/>
+        /// </summary>
+        public static Task<AccountsFrontiers> AccountsFrontiersAsync(this NanoRpcClient client, params Account[] accounts)
+        {
+            return client.SendAsync(new AccountsFrontiersRequest(accounts));
+        }
+
+        /// <summary>
+        /// Sends <see cref="AccountsPendingRequest"/>
+        /// </summary>
+        public static Task<AccountsPending> AccountsPendingAsync(this NanoRpcClient client, int count, params Account[] accounts)
+        {
+            return client.SendAsync(new AccountsPendingRequest(count, accounts));
+        }
+
+        /// <summary>
+        /// Sends <see cref="AccountsPendingWithAmountRequest"/>
+        /// </summary>
+        public static Task<AccountsPendingWithAmount> AccountsPendingAsync(this NanoRpcClient client, BigInteger threshold, int count, Account[] accounts)
+        {
+            return client.SendAsync(new AccountsPendingWithAmountRequest(threshold, count, accounts));
+        }
+
+        /// <summary>
+        /// Sends <see cref="AccountsPendingWithAmountSourceRequest"/>
+        /// </summary>
+        public static Task<AccountsPendingWithAmountSource> AccountsPendingWithSourceAsync(this NanoRpcClient client, BigInteger threshold, int count, Account[] accounts)
+        {
+            return client.SendAsync(new AccountsPendingWithAmountSourceRequest(threshold, count, accounts));
+        }
+
+        /// <summary>
         /// Sends <see cref="ValidateAccountNumberRequest"/>
         /// </summary>
         public static async Task<byte> ValidateAccountNumberAsync(this NanoRpcClient client, Account account)
         {
             var r = await client.SendAsync(new ValidateAccountNumberRequest(account));
             return r.Valid;
+        }
+
+        #endregion
+
+        #region Blocks
+
+        /// <summary>
+        /// Sends <see cref="BlockAccountRequest"/>
+        /// </summary>
+        public static async Task<Account> BlockAccountAsync(this NanoRpcClient client, Hex32 block)
+        {
+            var r = await client.SendAsync(new BlockAccountRequest(block));
+            return r.Account;
+        }
+
+        /// <summary>
+        /// Sends <see cref="BlockCountRequest"/>
+        /// </summary>
+        public static Task<BlockCount> BlockCountAsync(this NanoRpcClient client)
+        {
+            return client.SendAsync(new BlockCountRequest());
+        }
+
+        /// <summary>
+        /// Sends <see cref="BlockCountByTypeRequest"/>
+        /// </summary>
+        public static Task<BlockCountByType> BlockCountByTypeAsync(this NanoRpcClient client)
+        {
+            return client.SendAsync(new BlockCountByTypeRequest());
+        }
+
+        /// <summary>
+        /// Sends <see cref="ChainRequest"/>
+        /// </summary>
+        public static Task<Chain> ChainAsync(this NanoRpcClient client, Hex32 block, long count = -1)
+        {
+            return client.SendAsync(new ChainRequest(block, count));
         }
 
         #endregion
@@ -169,6 +282,27 @@
         {
             var r = await client.SendAsync(new RaiToRawRequest(amount));
             return r.Amount;
+        }
+
+        #endregion
+
+        #region Confirmation
+
+        /// <summary>
+        /// Sends <see cref="BlockConfirmRequest"/>
+        /// </summary>
+        public static async Task<byte> BlockConfirmAsync(this NanoRpcClient client, Hex32 hash)
+        {
+            var r = await client.SendAsync(new BlockConfirmRequest(hash));
+            return r.Started;
+        }
+
+        /// <summary>
+        /// Sends <see cref="ConfirmationHistoryRequest"/>
+        /// </summary>
+        public static Task<ConfirmationHistory> ConfirmationHistoryAsync(this NanoRpcClient client)
+        {
+            return client.SendAsync(new ConfirmationHistoryRequest());
         }
 
         #endregion
