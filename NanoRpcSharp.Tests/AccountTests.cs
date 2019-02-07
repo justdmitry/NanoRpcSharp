@@ -9,6 +9,7 @@ namespace NanoRpcSharp
         [InlineData("xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3")]
         [InlineData("xrb_1111111111111111111111111111111111111111111111111111hifc8npp")]
         [InlineData("nano_1111111111111111111111111111111111111111111111111111hifc8npp")]
+        [InlineData("ban_1111111111111111111111111111111111111111111111111111hifc8npp")]
         public void ValidAccount(string value)
         {
             var account = new Account(value);

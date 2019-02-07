@@ -11,7 +11,7 @@
     [TypeConverter(typeof(AccountConverter))]
     public struct Account : IEquatable<Account>, IComparable<Account>
     {
-        private static readonly Regex Pattern = new Regex(@"^ (xrb|nano) _ [\w\d]{60} $", RegexOptions.IgnorePatternWhitespace);
+        private static readonly Regex Pattern = new Regex(@"^ (xrb|nano|ban) _ [\w\d]{60} $", RegexOptions.IgnorePatternWhitespace);
 
         private string value;
 
