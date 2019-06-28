@@ -15,8 +15,8 @@
 
             var validJson = @"
 {  
-  ""action"": ""account_history"",  
-  ""account"": ""xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3"",  
+  ""action"": ""account_history"",
+  ""account"": ""xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3"",
   ""count"": 1,
   ""raw"": ""false""
 }
@@ -36,9 +36,9 @@
             var reqJson = NanoRpcClient.Serialize(req);
 
             var validJson = @"
-{  
-  ""action"": ""account_history"",  
-  ""account"": ""xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3"",  
+{
+  ""action"": ""account_history"",
+  ""account"": ""xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3"",
   ""raw"": ""true"",
   ""head"": ""991CF190094C00F0B68E2E5F75F6BEE95A2E0BD93CEAA4A6734DB9F19B728948"",
 }
@@ -51,11 +51,11 @@
         public void ResponseOk()
         {
             var validJson = @"
-{  
+{
     ""history"": [{
             ""hash"": ""000D1BAEC8EC208142C99059B393051BAC8380F9B5A2E6B2489A277D81789F3F"",
             ""type"": ""receive"",
-            ""account"": ""xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpi00000000"",
+            ""account"": ""xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3"",
             ""amount"": ""100000000000000000000000000000000""
     }],
     ""previous"": ""EA7A3E46EE1BAB24C078AEA6F82D552E645874C858636BEB81ECA0A340CE7550""
@@ -66,7 +66,7 @@
             Assert.Single(obj.History);
             Assert.Equal("000D1BAEC8EC208142C99059B393051BAC8380F9B5A2E6B2489A277D81789F3F", obj.History[0].Hash);
             Assert.Equal("receive", obj.History[0].Type);
-            Assert.Equal("xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpi00000000", obj.History[0].Account);
+            Assert.Equal("xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3", obj.History[0].Account);
             Assert.Equal(BigInteger.Parse("100000000000000000000000000000000"), obj.History[0].Amount);
 
             Assert.Equal("EA7A3E46EE1BAB24C078AEA6F82D552E645874C858636BEB81ECA0A340CE7550", obj.Previous);

@@ -13,7 +13,7 @@
             var reqJson = NanoRpcClient.Serialize(req);
 
             var validJson = @"
-{  
+{
   ""action"": ""accounts_create"",
   ""wallet"": ""000D1BAEC8EC208142C99059B393051BAC8380F9B5A2E6B2489A277D81789F3F"",
   ""count"": 2,
@@ -28,10 +28,10 @@
         public void ResponseOk()
         {
             var validJson = @"
-{  
+{
   ""accounts"": [
-     ""xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpi00000000"",
-     ""xrb_1e5aqegc1jb7qe964u4adzmcezyo6o146zb8hm6dft8tkp79za3s00000000""
+     ""xrb_1111111111111111111111111111111111111111111111111111hifc8npp"",
+     ""xrb_1ipx847tk8o46pwxt5qjdbncjqcbwcc1rrmqnkztrfjy5k7z4imsrata9est""
   ]
 }
 ";
@@ -40,8 +40,8 @@
             Assert.Equal(
                 new Account[]
                 {
-                    "xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpi00000000",
-                    "xrb_1e5aqegc1jb7qe964u4adzmcezyo6o146zb8hm6dft8tkp79za3s00000000",
+                    "xrb_1111111111111111111111111111111111111111111111111111hifc8npp",
+                    "xrb_1ipx847tk8o46pwxt5qjdbncjqcbwcc1rrmqnkztrfjy5k7z4imsrata9est",
                 },
                 obj.Accounts);
         }

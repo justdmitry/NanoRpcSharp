@@ -5,12 +5,12 @@
     /// </summary>
     public class ValidateAccountNumberRequest : RequestBase<ValidateAccountNumber>
     {
-        public ValidateAccountNumberRequest(Account account)
+        public ValidateAccountNumberRequest(string account)
             : base("validate_account_number")
         {
             this.Account = account;
         }
 
-        public Account Account { get; set; }
+        public string Account { get; set; }
     }
 }

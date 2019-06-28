@@ -10,13 +10,13 @@
         [Fact]
         public void RequestOk()
         {
-            var req = new AccountBalanceRequest("xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpi00000000");
+            var req = new AccountBalanceRequest("xrb_1111111111111111111111111111111111111111111111111111hifc8npp");
             var reqJson = NanoRpcClient.Serialize(req);
 
             var validJson = @"
 {
   ""action"": ""account_balance"",
-  ""account"": ""xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpi00000000""
+  ""account"": ""xrb_1111111111111111111111111111111111111111111111111111hifc8npp""
 }
 ";
 
@@ -27,8 +27,8 @@
         public void ResponseOk()
         {
             var validJson = @"
-{  
-  ""balance"": 10000,  
+{
+  ""balance"": 10000,
   ""pending"": ""20000000000000000000000000000000000""
 }
 ";

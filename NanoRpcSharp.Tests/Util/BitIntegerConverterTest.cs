@@ -9,6 +9,9 @@
         [Fact]
         public void ItWorks()
         {
+            var jsonSettings = new JsonSerializerSettings();
+            jsonSettings.Converters.Add(new BigIntegerConverter());
+
             var json = @"
 {
   ""val1"": ""123"",
@@ -16,7 +19,7 @@
   ""val3"": ""20000000000000000000000000000000000""
 }
 ";
-            var obj = JsonConvert.DeserializeObject<TestClass>(json);
+            var obj = JsonConvert.DeserializeObject<TestClass>(json, jsonSettings);
             Assert.Equal(123, obj.Val1);
             Assert.Equal(12345, obj.Val2);
             Assert.Equal(BigInteger.Parse("20000000000000000000000000000000000"), obj.Val3);

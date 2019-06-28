@@ -183,7 +183,7 @@
         /// <summary>
         /// Sends <see cref="ValidateAccountNumberRequest"/>
         /// </summary>
-        public static async Task<byte> ValidateAccountNumberAsync(this NanoRpcClient client, Account account)
+        public static async Task<byte> ValidateAccountNumberAsync(this NanoRpcClient client, string account)
         {
             var r = await client.SendAsync(new ValidateAccountNumberRequest(account));
             return r.Valid;

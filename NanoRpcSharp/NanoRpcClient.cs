@@ -11,7 +11,7 @@
 
     public class NanoRpcClient
     {
-        private static readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings
+        public static readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings
         {
             ContractResolver = new DefaultContractResolver() { NamingStrategy = new SnakeCaseNamingStrategy() },
             NullValueHandling = NullValueHandling.Ignore,

@@ -4,37 +4,34 @@
     using System.ComponentModel;
     using System.Globalization;
     using System.Text.RegularExpressions;
+    using Blake2Core;
 
     /// <summary>
-    /// Account number/identifier
+    /// Account number/identifier.
     /// </summary>
     [TypeConverter(typeof(AccountConverter))]
     public struct Account : IEquatable<Account>, IComparable<Account>
     {
-        private static readonly Regex Pattern = new Regex(@"^ (xrb|nano|ban) _ [\w\d]{60} $", RegexOptions.IgnorePatternWhitespace);
+        private const string EmptyAddress = "xrb_1111111111111111111111111111111111111111111111111111hifc8npp";
 
-        private string value;
+        private static readonly Regex Pattern = new Regex($"^ (xrb|nano|ban) _ [{NanoBase32Encoding.Alphabet}]{{60}} $", RegexOptions.IgnorePatternWhitespace);
 
-        public Account(string value)
+        private static readonly Blake2BConfig ChecksumBlack2bConfig = new Blake2BConfig() { OutputSizeInBytes = 5 };
+
+        private readonly string value;
+
+        private Account(string value)
         {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-
-            if (!Pattern.IsMatch(value))
-            {
-                throw new ArgumentException(nameof(value), "Doesn't match pattern");
-            }
-
             this.value = value;
         }
 
-        public static implicit operator Account(string s)
-            => new Account(s);
+        public static Account Empty { get; } = new Account(EmptyAddress);
 
-        public static implicit operator string(Account path)
-            => path.ToString();
+        public static implicit operator Account(string s)
+            => Account.Parse(s);
+
+        public static implicit operator string(Account account)
+            => account.ToString();
 
         public static bool operator ==(Account left, Account right)
         {
@@ -46,19 +43,68 @@
             return !left.Equals(right);
         }
 
+        public static Account Parse(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            if (!TryParse(value, out var account))
+            {
+                throw new ArgumentException(nameof(value), "Not a valid address");
+            }
+
+            return account;
+        }
+
+        public static bool TryParse(string value, out Account account)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                account = Empty;
+                return false;
+            }
+
+            value = value.ToLowerInvariant();
+
+            if (!Pattern.IsMatch(value))
+            {
+                account = Empty;
+                return false;
+            }
+
+            var key = value.Substring(value.Length - 60, 52);
+            var checksum = value.Substring(value.Length - 8, 8);
+
+            var pubKeyBytes = NanoBase32Encoding.Base32ToBytes(key.ToCharArray());
+            var checksumBytes = Blake2B.ComputeHash(pubKeyBytes, ChecksumBlack2bConfig);
+            checksumBytes.Reverse();
+            var validChecksum = NanoBase32Encoding.BytesToBase32(checksumBytes);
+
+            if (!checksum.Equals(validChecksum))
+            {
+                account = Empty;
+                return false;
+            }
+
+            account = new Account(value);
+            return true;
+        }
+
         public bool Equals(Account other)
         {
-            return value.Equals(other.value, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(this.value ?? EmptyAddress, other.value ?? EmptyAddress, StringComparison.Ordinal);
         }
 
         public override string ToString()
         {
-            return value;
+            return value ?? EmptyAddress;
         }
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj))
+            if (obj is null)
             {
                 return false;
             }
@@ -68,12 +114,17 @@
 
         public override int GetHashCode()
         {
-            return value.GetHashCode();
+            return (value ?? EmptyAddress).GetHashCode();
         }
 
         public int CompareTo(Account other)
         {
-            return string.CompareOrdinal(this.value, other.value);
+            return string.CompareOrdinal(this.value ?? EmptyAddress, other.value ?? EmptyAddress);
+        }
+
+        public bool IsEmpty()
+        {
+            return CompareTo(Empty) == 0;
         }
     }
 
@@ -86,7 +137,7 @@
 
         public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
             => value is string
-            ? new Account((string)value)
+            ? Account.Parse((string)value)
             : base.ConvertFrom(context, culture, value);
 
         public override object ConvertTo(

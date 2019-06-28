@@ -11,14 +11,14 @@
         {
             var req = new AccountRemoveRequest(
                 "000D1BAEC8EC208142C99059B393051BAC8380F9B5A2E6B2489A277D81789F3F",
-                "xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpi00000000");
+                "xrb_1111111111111111111111111111111111111111111111111111hifc8npp");
             var reqJson = NanoRpcClient.Serialize(req);
 
             var validJson = @"
-{  
-  ""action"": ""account_remove"",  
-  ""wallet"": ""000D1BAEC8EC208142C99059B393051BAC8380F9B5A2E6B2489A277D81789F3F"",  
-  ""account"" : ""xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpi00000000""
+{
+  ""action"": ""account_remove"",
+  ""wallet"": ""000D1BAEC8EC208142C99059B393051BAC8380F9B5A2E6B2489A277D81789F3F"",
+  ""account"" : ""xrb_1111111111111111111111111111111111111111111111111111hifc8npp""
 }
 ";
 
@@ -29,7 +29,7 @@
         public void ResponseOk()
         {
             var validJson = @"
-{  
+{
   ""removed"" : ""1""
 }
 ";
