@@ -2,7 +2,6 @@
 {
     using System;
     using System.IO;
-    using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Threading.Tasks;
     using Microsoft.Extensions.Configuration;
@@ -19,45 +18,53 @@
                 .AddUserSecrets(typeof(Program).Assembly)
                 .Build();
 
-            var endpoint = config["Endpoint"];
+            var endpoint = new Uri(config["Endpoint"]);
             var auth = config["Authorization"];
 
             var services = new ServiceCollection()
-                .AddLogging(x => x.SetMinimumLevel(LogLevel.Debug).AddConsole())
+                .AddLogging(x => x.AddConfiguration(config.GetSection("Logging")).AddConsole())
+                .AddNanoRpcClient(endpoint)
+                    .ConfigureHttpClient(c =>
+                    {
+                        if (!string.IsNullOrEmpty(auth))
+                        {
+                            c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(auth);
+                        }
+                    })
+                    .Services
                 .BuildServiceProvider();
 
-            var client = new HttpClient() { BaseAddress = new Uri(endpoint) };
-            if (!string.IsNullOrEmpty(auth))
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(auth);
-            }
-
-            var logger = services.GetService<ILoggerFactory>().CreateLogger("Program");
-
-            logger.LogDebug("Using endpoint: " + client.BaseAddress);
-
-            var nanoClient = new NanoRpcClient(client, services.GetRequiredService<ILogger<NanoRpcClient>>());
+            var logger = services.GetRequiredService<ILoggerFactory>().CreateLogger("Program");
+            var nanoClient = services.GetRequiredService<INanoRpcClient>();
 
             var ver = await nanoClient.VersionAsync();
             logger.LogInformation($"Server: {ver.NodeVendor}, RPC ver {ver.RpcVersion}, Store ver {ver.StoreVersion}");
 
-            var account = "xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3";
-            var balance = await nanoClient.AccountBalanceAsync(account);
-            logger.LogInformation($"Account: {account}");
-            logger.LogInformation($"Balance RAW:  {balance.Balance}");
+            var genesisAccount = "xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3";
+            var balance = await nanoClient.AccountBalanceAsync(genesisAccount);
+            logger.LogInformation($"Account: {genesisAccount}");
+            logger.LogInformation($"Balance  RAW: {balance.Balance}");
 
-            var nanoBalance = await nanoClient.RaiFromRawAsync(balance.Balance);
-            logger.LogInformation($"Balance RAI:  {nanoBalance}");
-            logger.LogInformation($"Balance NANO: {nanoBalance / 1000000}");
+            var raiBalance = await nanoClient.RaiFromRawAsync(balance.Balance);
+            logger.LogInformation($"Balance  RAI: {raiBalance}");
+            var kraiBalance = await nanoClient.KraiFromRawAsync(balance.Balance);
+            logger.LogInformation($"Balance KRAI: {kraiBalance}");
+            var mraiBalance = await nanoClient.MraiFromRawAsync(balance.Balance);
+            logger.LogInformation($"Balance MRAI: {mraiBalance}");
 
-            var valid = await nanoClient.ValidateAccountNumberAsync("xrb_3i7qx5qp645sdjd4ncq1q34fby95zmwotzbi9x1gt1c96ix4uqyian8f0000");
-            logger.LogInformation($"Valid: {valid}");
+            var info = await nanoClient.AccountInfoAsync(genesisAccount, true, true, true);
+            logger.LogInformation($"Open block: {info.OpenBlock}");
 
-            var info = await nanoClient.AccountInfoAsync(account, true, true, true);
-            logger.LogInformation(info.OpenBlock);
+            var hist = await nanoClient.AccountHistoryAsync(genesisAccount, true, 10);
+            logger.LogInformation($"Last 10 in history count: {hist.History.Count}");
 
-            var hist = await nanoClient.AccountHistoryAsync("xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3", true, 2);
-            logger.LogInformation(hist.History.Count.ToString());
+            var invalidAccount = "xrb_3i7qx5qp645sdjd4ncq1q34fby95zmwotzbi9x1gt1c96ix4uqyian8f0000";
+            logger.LogInformation($"Account: {invalidAccount}");
+            var valid = await nanoClient.ValidateAccountNumberAsync(invalidAccount);
+            logger.LogInformation($"Valid by node: {valid}");
+            logger.LogInformation($"Valid by parsing: {Account.TryParse(invalidAccount, out _)}");
+
+            await Task.Delay(500);
         }
     }
 }

@@ -9,7 +9,7 @@
     using Newtonsoft.Json.Linq;
     using Newtonsoft.Json.Serialization;
 
-    public class NanoRpcClient
+    public class NanoRpcClient : INanoRpcClient
     {
         public static readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings
         {
@@ -50,11 +50,12 @@
             try
             {
                 var reqText = Serialize(request);
-                logger.LogDebug("Request:  " + reqText);
-                var resp = await httpClient.PostAsync("/", new StringContent(reqText, Encoding.UTF8, "application/json"));
+                logger.LogTrace("Request:  " + reqText);
+
+                var resp = await httpClient.PostAsync(string.Empty, new StringContent(reqText, Encoding.UTF8, "application/json"));
                 resp.EnsureSuccessStatusCode();
                 var respText = await resp.Content.ReadAsStringAsync();
-                logger.LogDebug("Response: " + respText);
+                logger.LogTrace("Response: " + respText);
 
                 var obj = JObject.Parse(respText);
                 var errorText = obj["error"];
