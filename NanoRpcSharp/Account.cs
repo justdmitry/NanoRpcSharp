@@ -74,15 +74,15 @@
                 return false;
             }
 
-            var key = value.Substring(value.Length - 60, 52);
-            var checksum = value.Substring(value.Length - 8, 8);
+            var key = value.AsSpan(value.Length - 60, 52);
+            var checksum = value.AsSpan(value.Length - 8, 8);
 
-            var pubKeyBytes = NanoBase32Encoding.Base32ToBytes(key.ToCharArray());
-            var checksumBytes = Blake2B.ComputeHash(pubKeyBytes, ChecksumBlack2bConfig);
+            var pubKeyBytes = NanoBase32Encoding.Base32ToBytes(key);
+            var checksumBytes = Blake2B.ComputeHash(pubKeyBytes.ToArray(), ChecksumBlack2bConfig);
             checksumBytes.Reverse();
             var validChecksum = NanoBase32Encoding.BytesToBase32(checksumBytes);
 
-            if (!checksum.Equals(validChecksum))
+            if (!checksum.SequenceEqual(validChecksum.AsSpan()))
             {
                 account = Empty;
                 return false;

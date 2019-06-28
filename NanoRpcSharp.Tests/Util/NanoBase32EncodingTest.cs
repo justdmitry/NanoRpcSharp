@@ -25,7 +25,7 @@
             var base32 = NanoBase32Encoding.BytesToBase32(bytes);
             Assert.Equal(validBase32, base32);
 
-            var newBytes = NanoBase32Encoding.Base32ToBytes(base32.ToCharArray());
+            var newBytes = NanoBase32Encoding.Base32ToBytes(base32);
             Assert.Equal(bytes, newBytes.ToArray());
         }
 

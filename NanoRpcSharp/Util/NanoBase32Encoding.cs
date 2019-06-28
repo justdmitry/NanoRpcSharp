@@ -17,7 +17,7 @@
         /// </summary>
         /// <param name="bytes">Source array.</param>
         /// <returns>Converted string.</returns>
-        public static string BytesToBase32(byte[] bytes)
+        public static string BytesToBase32(ReadOnlySpan<byte> bytes)
         {
             var length = bytes.Length;
             var leftover = (length * 8) % 5;
@@ -52,7 +52,7 @@
         /// </summary>
         /// <param name="base32">Source string.</param>
         /// <returns>Converted byte array.</returns>
-        public static byte[] Base32ToBytes(char[] base32)
+        public static Span<byte> Base32ToBytes(ReadOnlySpan<char> base32)
         {
             var length = base32.Length;
             var leftover = (length * 8) % 5;
@@ -87,7 +87,7 @@
             }
             else
             {
-                return output.Skip(1).ToArray();
+                return output.AsSpan(1);
             }
         }
     }
