@@ -1,7 +1,7 @@
 ﻿namespace NanoRpcSharp.Messages
 {
     /// <summary>
-    /// Sets the representative for <see cref="Account"/> in wallet
+    /// Sets the representative for <see cref="Account"/> in wallet.
     /// </summary>
     [EnableControlRequired]
     public class AccountRepresentativeSetRequest : RequestBase<AccountRepresentativeSet>

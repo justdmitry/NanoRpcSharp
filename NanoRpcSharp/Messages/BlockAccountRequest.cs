@@ -1,7 +1,7 @@
 ﻿namespace NanoRpcSharp.Messages
 {
     /// <summary>
-    /// Returns the account containing block
+    /// Returns the account containing block.
     /// </summary>
     public class BlockAccountRequest : RequestBase<BlockAccount>
     {

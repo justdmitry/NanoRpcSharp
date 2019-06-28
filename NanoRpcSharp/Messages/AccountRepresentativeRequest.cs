@@ -1,7 +1,7 @@
 ﻿namespace NanoRpcSharp.Messages
 {
     /// <summary>
-    /// Returns the representative for <see cref="Account"/>
+    /// Returns the representative for <see cref="Account"/>.
     /// </summary>
     public class AccountRepresentativeRequest : RequestBase<AccountRepresentative>
     {

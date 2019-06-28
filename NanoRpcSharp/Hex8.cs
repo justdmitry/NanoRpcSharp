@@ -6,7 +6,7 @@
     using System.Text.RegularExpressions;
 
     /// <summary>
-    /// 8 byte value, usually represented as a 64 character, uppercase hexadecimal string(0-9A-F)
+    /// 8 byte value, usually represented as a 64 character, uppercase hexadecimal string(0-9A-F).
     /// </summary>
     [TypeConverter(typeof(Hex8Converter))]
     public struct Hex8 : IEquatable<Hex8>, IComparable<Hex8>

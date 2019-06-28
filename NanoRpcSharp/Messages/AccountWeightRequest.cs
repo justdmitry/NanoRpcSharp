@@ -1,7 +1,7 @@
 ﻿namespace NanoRpcSharp.Messages
 {
     /// <summary>
-    /// Returns the voting weight for <see cref="Account"/>
+    /// Returns the voting weight for <see cref="Account"/>.
     /// </summary>
     public class AccountWeightRequest : RequestBase<AccountWeight>
     {

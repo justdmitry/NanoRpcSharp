@@ -1,7 +1,7 @@
 ﻿namespace NanoRpcSharp.Messages
 {
     /// <summary>
-    /// Creates new accounts, insert next deterministic keys in wallet up to count
+    /// Creates new accounts, insert next deterministic keys in wallet up to count.
     /// </summary>
     [EnableControlRequired]
     public class AccountsCreateRequest : RequestBase<AccountsCreate>

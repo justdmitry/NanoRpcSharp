@@ -5,7 +5,7 @@
     using System.Linq;
 
     /// <summary>
-    /// Moves accounts from source to wallet
+    /// Moves accounts from source to wallet.
     /// </summary>
     [EnableControlRequired]
     public class AccountMoveRequest : RequestBase<AccountMove>

@@ -1,7 +1,7 @@
 ﻿namespace NanoRpcSharp.Messages
 {
     /// <summary>
-    /// Check whether <see cref="Account"/> is a valid account number
+    /// Check whether <see cref="Account"/> is a valid account number.
     /// </summary>
     public class ValidateAccountNumberRequest : RequestBase<ValidateAccountNumber>
     {

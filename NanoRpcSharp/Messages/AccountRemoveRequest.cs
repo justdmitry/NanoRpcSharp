@@ -4,7 +4,7 @@
     using System.Collections.Generic;
 
     /// <summary>
-    /// Remove account from source to wallet
+    /// Remove account from source to wallet.
     /// </summary>
     [EnableControlRequired]
     public class AccountRemoveRequest : RequestBase<AccountRemove>

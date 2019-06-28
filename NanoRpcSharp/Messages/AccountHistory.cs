@@ -21,22 +21,22 @@
             public BigInteger Amount { get; set; }
 
             /// <summary>
-            /// Only for RAW request
+            /// Only for RAW request.
             /// </summary>
             public Account? Destination { get; set; }
 
             /// <summary>
-            /// Only for RAW request
+            /// Only for RAW request.
             /// </summary>
             public BigInteger? Balance { get; set; }
 
             /// <summary>
-            /// Only for RAW request
+            /// Only for RAW request.
             /// </summary>
             public string Work { get; set; }
 
             /// <summary>
-            /// Only for RAW request
+            /// Only for RAW request.
             /// </summary>
             public string Signature { get; set; }
         }

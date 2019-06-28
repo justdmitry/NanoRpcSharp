@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// Lists all the accounts inside wallet
+    /// Lists all the accounts inside wallet.
     /// </summary>
     public class AccountListRequest : RequestBase<AccountList>
     {

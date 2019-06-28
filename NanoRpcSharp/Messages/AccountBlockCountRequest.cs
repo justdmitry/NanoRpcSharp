@@ -1,7 +1,7 @@
 ﻿namespace NanoRpcSharp.Messages
 {
     /// <summary>
-    /// Get number of blocks for a specific <see cref="Account"/>
+    /// Get number of blocks for a specific <see cref="Account"/>.
     /// </summary>
     public class AccountBlockCountRequest : RequestBase<AccountBlockCount>
     {

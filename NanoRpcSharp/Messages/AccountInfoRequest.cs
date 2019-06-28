@@ -16,17 +16,17 @@
         public Account Account { get; set; }
 
         /// <summary>
-        /// Additionally returns representative for account
+        /// Additionally returns representative for account.
         /// </summary>
         public bool? Representative { get; set; }
 
         /// <summary>
-        /// Additionally returns voting weight for account
+        /// Additionally returns voting weight for account.
         /// </summary>
         public bool? Weight { get; set; }
 
         /// <summary>
-        /// Additionally returns pending balance for account
+        /// Additionally returns pending balance for account.
         /// </summary>
         public bool? Pending { get; set; }
     }

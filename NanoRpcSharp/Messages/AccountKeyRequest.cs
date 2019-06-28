@@ -1,7 +1,7 @@
 ﻿namespace NanoRpcSharp.Messages
 {
     /// <summary>
-    /// Get the public key for <see cref="Account"/>
+    /// Get the public key for <see cref="Account"/>.
     /// </summary>
     public class AccountKeyRequest : RequestBase<AccountKey>
     {

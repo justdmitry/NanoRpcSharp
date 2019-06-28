@@ -1,7 +1,7 @@
 ﻿namespace NanoRpcSharp
 {
     /// <summary>
-    /// Base class for all requests (contain only <see cref="Action"/>)
+    /// Base class for all requests (contain only <see cref="Action"/>).
     /// </summary>
     public abstract class RequestBase<TResponse>
     {
@@ -11,7 +11,7 @@
         }
 
         /// <summary>
-        /// Action name (required)
+        /// Action name (required).
         /// </summary>
         public string Action { get; protected set; }
     }

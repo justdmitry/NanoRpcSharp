@@ -2,7 +2,7 @@
 {
     /// <summary>
     /// Request confirmation for block from known online representative nodes.
-    /// Check results with <see cref="ConfirmationHistoryRequest"/>
+    /// Check results with <see cref="ConfirmationHistoryRequest"/>.
     /// </summary>
     public class BlockConfirmRequest : RequestBase<BlockConfirm>
     {

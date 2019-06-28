@@ -4,9 +4,9 @@
     using System.Numerics;
 
     /// <summary>
-    /// Returns a list of block hashes which have not yet been received by these <see cref="Account"/>
+    /// Returns a list of block hashes which have not yet been received by these <see cref="Account"/>.
     /// </summary>
-    /// <remarks>See also: <seealso cref="AccountsPendingWithAmountRequest"/>, <seealso cref="AccountsPendingRequest"/></remarks>
+    /// <remarks>See also: <seealso cref="AccountsPendingWithAmountRequest"/>,. <seealso cref="AccountsPendingRequest"/></remarks>
     public class AccountsPendingWithAmountSourceRequest : RequestBase<AccountsPendingWithAmountSource>
     {
         public AccountsPendingWithAmountSourceRequest(BigInteger threshold, int count, params Account[] accounts)
