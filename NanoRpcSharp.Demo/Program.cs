@@ -38,6 +38,7 @@
             var nanoClient = services.GetRequiredService<INanoRpcClient>();
 
             var ver = await nanoClient.VersionAsync();
+            logger.LogInformation($"Server type: {ver.NetworkType}");
             logger.LogInformation($"Server: {ver.NodeVendor}, RPC ver {ver.RpcVersion}, Store ver {ver.StoreVersion}");
 
             var genesisAccount = "xrb_3t6k35gi95xu6tergt6p69ck76ogmitsa8mnijtpxm9fkcm736xtoncuohr3";
