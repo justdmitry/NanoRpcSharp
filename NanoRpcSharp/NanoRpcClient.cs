@@ -1,6 +1,7 @@
 ﻿namespace NanoRpcSharp
 {
     using System;
+    using System.Linq;
     using System.Net.Http;
     using System.Text;
     using System.Threading.Tasks;
@@ -58,10 +59,19 @@
                 logger.LogTrace("Response: " + respText);
 
                 var obj = JObject.Parse(respText);
-                var errorText = obj["error"];
-                if (errorText != null)
+                var error = obj["error"];
+                if (error != null)
                 {
-                    throw new ErrorResponseException(errorText.Value<string>());
+                    var errorText = error.Value<string>();
+
+                    if (!string.IsNullOrEmpty(errorText)
+                        && request.WellKnownErrors != null
+                        && request.WellKnownErrors.Contains(errorText, StringComparer.Ordinal))
+                    {
+                        return default;
+                    }
+
+                    throw new ErrorResponseException(errorText);
                 }
                 else
                 {

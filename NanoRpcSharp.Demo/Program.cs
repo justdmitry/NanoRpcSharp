@@ -65,6 +65,12 @@
             logger.LogInformation($"Valid by node: {valid}");
             logger.LogInformation($"Valid by parsing: {Account.TryParse(invalidAccount, out _)}");
 
+            var genesis = "991CF190094C00F0B68E2E5F75F6BEE95A2E0BD93CEAA4A6734DB9F19B728948";
+            var genesisUnchecked = await nanoClient.UncheckedGetAsync(genesis);
+            logger.LogInformation($"Block {genesis} unchecked: {(genesisUnchecked == null ? " NO " : "YES")}");
+            var genesisInfo = await nanoClient.BlockInfoAsync(genesis);
+            logger.LogInformation($"Block {genesis} height: {genesisInfo.Height}");
+
             await Task.Delay(500);
         }
     }

@@ -226,6 +226,24 @@
             return client.SendAsync(new ChainRequest(block, count));
         }
 
+        /// <summary>
+        /// Sends <see cref="BlockInfoRequest"/>.
+        /// </summary>
+        /// <returns><see cref="BlockInfo"/> for block, or <b>null</b> if block not found.</returns>
+        public static Task<BlockInfo> BlockInfoAsync(this INanoRpcClient client, Hex32 hash)
+        {
+            return client.SendAsync(new BlockInfoRequest(hash));
+        }
+
+        /// <summary>
+        /// Sends <see cref="UncheckedGetRequest"/>.
+        /// </summary>
+        /// <returns><see cref="UncheckedGet"/> for block, or <b>null</b> if block not found.</returns>
+        public static Task<UncheckedGet> UncheckedGetAsync(this INanoRpcClient client, Hex32 hash)
+        {
+            return client.SendAsync(new UncheckedGetRequest(hash));
+        }
+
         #endregion
 
         #region Conversion
