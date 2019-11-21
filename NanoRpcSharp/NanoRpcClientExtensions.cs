@@ -246,6 +246,16 @@
 
         #endregion
 
+
+        /// <summary>
+        /// Sends <see cref="DelegatorsRequest"/>.
+        /// </summary>
+        /// <returns><see cref="Delegators"/> list for account.</returns>
+        public static Task<Delegators> Delegators(this INanoRpcClient client, Account account)
+        {
+            return client.SendAsync(new DelegatorsRequest(account));
+        }
+
         #region Conversion
 
         /// <summary>
