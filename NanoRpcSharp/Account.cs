@@ -4,7 +4,7 @@
     using System.ComponentModel;
     using System.Globalization;
     using System.Text.RegularExpressions;
-    using Blake2Core;
+    using Blake2Sharp;
 
     /// <summary>
     /// Account number/identifier.

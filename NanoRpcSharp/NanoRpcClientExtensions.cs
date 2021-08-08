@@ -246,7 +246,6 @@
 
         #endregion
 
-
         /// <summary>
         /// Sends <see cref="DelegatorsRequest"/>.
         /// </summary>
