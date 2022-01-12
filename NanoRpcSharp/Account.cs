@@ -14,7 +14,7 @@
     {
         private const string EmptyAddress = "xrb_1111111111111111111111111111111111111111111111111111hifc8npp";
 
-        private static readonly Regex Pattern = new Regex($"^ (xrb|nano|ban) _ [{NanoBase32Encoding.Alphabet}]{{60}} $", RegexOptions.IgnorePatternWhitespace);
+        private static readonly Regex Pattern = new Regex($"^ (xrb|nano|xno|ban|paw) _ [{NanoBase32Encoding.Alphabet}]{{60}} $", RegexOptions.IgnorePatternWhitespace);
 
         private static readonly Blake2BConfig ChecksumBlack2bConfig = new Blake2BConfig() { OutputSizeInBytes = 5 };
 
