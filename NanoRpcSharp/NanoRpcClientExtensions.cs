@@ -279,10 +279,18 @@
         /// <summary>
         /// Sends <see cref="BanToRawRequest"/>.
         /// </summary>
-        [System.Obsolete("Deprecated, see https://docs.nano.org/commands/rpc-protocol/#deprecated-rpcs")]
         public static async Task<BigInteger> BanToRawAsync(this INanoRpcClient client, BigInteger amount)
         {
             var r = await client.SendAsync(new BanToRawRequest(amount));
+            return r.Amount;
+        }
+
+        /// <summary>
+        /// Sends <see cref="BanFromRawRequest"/>.
+        /// </summary>
+        public static async Task<BigInteger> BanFromRawAsync(this INanoRpcClient client, BigInteger amount)
+        {
+            var r = await client.SendAsync(new BanFromRawRequest(amount));
             return r.Amount;
         }
 
@@ -339,6 +347,7 @@
         /// <summary>
         /// Sends <see cref="RaiToRawRequest"/>.
         /// </summary>
+        [System.Obsolete("Deprecated, see https://docs.nano.org/commands/rpc-protocol/#deprecated-rpcs")]
         public static async Task<BigInteger> RaiToRawAsync(this INanoRpcClient client, BigInteger amount)
         {
             var r = await client.SendAsync(new RaiToRawRequest(amount));
