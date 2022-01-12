@@ -250,9 +250,28 @@
         /// Sends <see cref="DelegatorsRequest"/>.
         /// </summary>
         /// <returns><see cref="Delegators"/> list for account.</returns>
+        [System.Obsolete("Use DelegatorsAsync")]
         public static Task<Delegators> Delegators(this INanoRpcClient client, Account account)
         {
             return client.SendAsync(new DelegatorsRequest(account));
+        }
+
+        /// <summary>
+        /// Sends <see cref="DelegatorsRequest"/>.
+        /// </summary>
+        /// <returns><see cref="Delegators"/> list for account.</returns>
+        public static Task<Delegators> DelegatorsAsync(this INanoRpcClient client, Account account)
+        {
+            return client.SendAsync(new DelegatorsRequest(account));
+        }
+
+        /// <summary>
+        /// Sends <see cref="DelegatorsCountRequest"/>.
+        /// </summary>
+        /// <returns><see cref="DelegatorsCount"/> for account.</returns>
+        public static Task<DelegatorsCount> DelegatorsCountAsync(this INanoRpcClient client, Account account)
+        {
+            return client.SendAsync(new DelegatorsCountRequest(account));
         }
 
         #region Conversion
@@ -260,6 +279,7 @@
         /// <summary>
         /// Sends <see cref="BanToRawRequest"/>.
         /// </summary>
+        [System.Obsolete("Deprecated, see https://docs.nano.org/commands/rpc-protocol/#deprecated-rpcs")]
         public static async Task<BigInteger> BanToRawAsync(this INanoRpcClient client, BigInteger amount)
         {
             var r = await client.SendAsync(new BanToRawRequest(amount));
@@ -269,6 +289,7 @@
         /// <summary>
         /// Sends <see cref="KraiFromRawRequest"/>.
         /// </summary>
+        [System.Obsolete("Deprecated, see https://docs.nano.org/commands/rpc-protocol/#deprecated-rpcs")]
         public static async Task<BigInteger> KraiFromRawAsync(this INanoRpcClient client, BigInteger amount)
         {
             var r = await client.SendAsync(new KraiFromRawRequest(amount));
@@ -278,6 +299,7 @@
         /// <summary>
         /// Sends <see cref="KraiToRawRequest"/>.
         /// </summary>
+        [System.Obsolete("Deprecated, see https://docs.nano.org/commands/rpc-protocol/#deprecated-rpcs")]
         public static async Task<BigInteger> KraiToRawAsync(this INanoRpcClient client, BigInteger amount)
         {
             var r = await client.SendAsync(new KraiToRawRequest(amount));
@@ -287,6 +309,7 @@
         /// <summary>
         /// Sends <see cref="MraiFromRawRequest"/>.
         /// </summary>
+        [System.Obsolete("Deprecated, see https://docs.nano.org/commands/rpc-protocol/#deprecated-rpcs")]
         public static async Task<BigInteger> MraiFromRawAsync(this INanoRpcClient client, BigInteger amount)
         {
             var r = await client.SendAsync(new MraiFromRawRequest(amount));
@@ -296,6 +319,7 @@
         /// <summary>
         /// Sends <see cref="MraiToRawRequest"/>.
         /// </summary>
+        [System.Obsolete("Deprecated, see https://docs.nano.org/commands/rpc-protocol/#deprecated-rpcs")]
         public static async Task<BigInteger> MraiToRawAsync(this INanoRpcClient client, BigInteger amount)
         {
             var r = await client.SendAsync(new MraiToRawRequest(amount));
@@ -305,6 +329,7 @@
         /// <summary>
         /// Sends <see cref="RaiFromRawRequest"/>.
         /// </summary>
+        [System.Obsolete("Deprecated, see https://docs.nano.org/commands/rpc-protocol/#deprecated-rpcs")]
         public static async Task<BigInteger> RaiFromRawAsync(this INanoRpcClient client, BigInteger amount)
         {
             var r = await client.SendAsync(new RaiFromRawRequest(amount));
@@ -317,6 +342,24 @@
         public static async Task<BigInteger> RaiToRawAsync(this INanoRpcClient client, BigInteger amount)
         {
             var r = await client.SendAsync(new RaiToRawRequest(amount));
+            return r.Amount;
+        }
+
+        /// <summary>
+        /// Sends <see cref="RawToNanoRequest"/>.
+        /// </summary>
+        public static async Task<BigInteger> RawToNanoAsync(this INanoRpcClient client, BigInteger amount)
+        {
+            var r = await client.SendAsync(new RawToNanoRequest(amount));
+            return r.Amount;
+        }
+
+        /// <summary>
+        /// Sends <see cref="NanoToRawRequest"/>.
+        /// </summary>
+        public static async Task<BigInteger> NanoToRawAsync(this INanoRpcClient client, BigInteger amount)
+        {
+            var r = await client.SendAsync(new NanoToRawRequest(amount));
             return r.Amount;
         }
 
