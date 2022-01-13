@@ -20,15 +20,40 @@
 
             public BigInteger Amount { get; set; }
 
+            public DateTimeOffset LocalTimestamp { get; set; }
+
+            public int Height { get; set; }
+
             /// <summary>
             /// Only for RAW request.
             /// </summary>
+            public Account? Representative { get; set; }
+
+            /// <summary>
+            /// Only for RAW request.
+            /// </summary>
+            [Obsolete("Removed from docs")]
             public Account? Destination { get; set; }
 
             /// <summary>
             /// Only for RAW request.
             /// </summary>
+            public Hex32? Link { get; set; }
+
+            /// <summary>
+            /// Only for RAW request.
+            /// </summary>
             public BigInteger? Balance { get; set; }
+
+            /// <summary>
+            /// Only for RAW request.
+            /// </summary>
+            public Hex32? Previous { get; set; }
+
+            /// <summary>
+            /// Only for RAW request.
+            /// </summary>
+            public string Subtype { get; set; }
 
             /// <summary>
             /// Only for RAW request.
