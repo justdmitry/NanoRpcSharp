@@ -28,6 +28,17 @@
         /// <summary>
         /// Additionally returns pending balance for account.
         /// </summary>
+        [System.Obsolete("Use Receivable")]
         public bool? Pending { get; set; }
+
+        /// <summary>
+        /// Additionally returns pending balance for account.
+        /// </summary>
+        public bool? Receivable { get; set; }
+
+        /// <summary>
+        /// Adds new return fields with prefix of confirmed_ for consistency.
+        /// </summary>
+        public bool? IncludeConfirmed { get; set; }
     }
 }
