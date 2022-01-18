@@ -29,13 +29,14 @@
         /// <summary>
         /// Sends <see cref="AccountInfoRequest"/>.
         /// </summary>
-        public static Task<AccountInfo> AccountInfoAsync(this INanoRpcClient client, Account account, bool? representative = null, bool? weight = null, bool? pending = null)
+        public static Task<AccountInfo> AccountInfoAsync(this INanoRpcClient client, Account account, bool? representative = null, bool? weight = null, bool? receivable = null, bool? includeConfirmed = null)
         {
             return client.SendAsync(new AccountInfoRequest(account)
             {
                 Representative = representative,
                 Weight = weight,
-                Pending = pending,
+                Receivable = receivable,
+                IncludeConfirmed = includeConfirmed,
             });
         }
 
