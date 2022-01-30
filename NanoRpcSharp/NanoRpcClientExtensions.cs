@@ -275,6 +275,33 @@
             return client.SendAsync(new DelegatorsCountRequest(account));
         }
 
+        /// <summary>
+        /// Sends <see cref="KeyCreateRequest"/>.
+        /// </summary>
+        /// <returns><see cref="KeyInfo"/> data.</returns>
+        public static Task<KeyInfo> KeyCreateAsync(this INanoRpcClient client)
+        {
+            return client.SendAsync(new KeyCreateRequest());
+        }
+
+        /// <summary>
+        /// Sends <see cref="KeyExpandRequest"/>.
+        /// </summary>
+        /// <returns><see cref="KeyInfo"/> data.</returns>
+        public static Task<KeyInfo> KeyExpandAsync(this INanoRpcClient client, Hex32 key)
+        {
+            return client.SendAsync(new KeyExpandRequest(key));
+        }
+
+        /// <summary>
+        /// Sends <see cref="DeterministicKeyRequest"/>.
+        /// </summary>
+        /// <returns><see cref="KeyInfo"/> data.</returns>
+        public static Task<KeyInfo> DeterministicKeyAsync(this INanoRpcClient client, Hex32 seed, uint index)
+        {
+            return client.SendAsync(new DeterministicKeyRequest(seed, index));
+        }
+
         #region Conversion
 
         /// <summary>
